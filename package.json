@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "test": "ts-node src/test.ts"
+  },
+  "dependencies": {
+    "@types/node": "^17.0.40",
+    "cheerio": "^1.0.0-rc.11",
+    "dotenv": "^16.0.1",
+    "googleapis": "^100.0.0",
+    "js-base64": "^3.7.2",
+    "mailparser": "^3.5.0",
+    "ts-node": "^10.7.0",
+    "tslib": "^2.4.0",
+    "typescript": "^4.6.4"
+  }
+}
