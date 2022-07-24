@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "test": "ts-node src/test.ts"
+    "test": "ts-node src/test.ts",
+    "build": "tsc"
   },
   "dependencies": {
     "@types/node": "^17.0.40",
@@ -9,8 +10,32 @@
     "googleapis": "^100.0.0",
     "js-base64": "^3.7.2",
     "mailparser": "^3.5.0",
+    "mimemessage": "^1.0.5",
+    "path": "^0.12.7",
     "ts-node": "^10.7.0",
     "tslib": "^2.4.0",
     "typescript": "^4.6.4"
-  }
+  },
+  "name": "@iyarsius/gmail-api",
+  "version": "1.0.0",
+  "description": "Gmail api wrapper ",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iyarsius/gmail-api.git"
+  },
+  "keywords": [
+    "gmail",
+    "api",
+    "wrapper",
+    "mail",
+    "node",
+    "google"
+  ],
+  "author": "iyarsius",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iyarsius/gmail-api/issues"
+  },
+  "homepage": "https://github.com/iyarsius/gmail-api#readme"
 }

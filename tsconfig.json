@@ -3,6 +3,7 @@
       "lib": ["ESNext"],
       "module": "commonjs",
       "moduleResolution": "node",
+      "declaration": true,
       "target": "ESNext",
       "outDir": "dist",
       "sourceMap": false,
@@ -16,5 +17,5 @@
       "importHelpers": true
   },
   "include": ["src", "enviroment.d.ts"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "exclude": ["node_modules", "**/*.spec.ts", "test.ts" ]
 }

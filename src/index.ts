@@ -1,9 +1,15 @@
+import { readFileSync, writeFileSync } from 'fs';
 import { Credentials, OAuth2Client } from 'google-auth-library';
 import { gmail_v1, google } from 'googleapis';
+import { join } from 'path';
 import { Message } from './classes/Message';
 import { IGmailOptions } from './types/Gmail';
 
-const SCOPES = ['https://www.googleapis.com/auth/gmail.modify'];
+const SCOPES = [
+    'https://mail.google.com/',
+    'https://www.googleapis.com/auth/gmail.modify',
+    'https://www.googleapis.com/auth/gmail.send',
+];
 
 export class Gmail {
     oAuth2Client: OAuth2Client;
@@ -19,7 +25,7 @@ export class Gmail {
             scope: SCOPES
         });
 
-        this.token = options.token;
+        this.token = options.token ? options.token : JSON.parse(readFileSync(join(__dirname, "./token.json"), 'utf8')) as Credentials;
     };
 
     async authorize(code?: string) {
@@ -39,6 +45,14 @@ export class Gmail {
         };
 
         this.oAuth2Client.setCredentials(this.token);
+
+        if (this.token.expiry_date < Date.now()) {
+            // refresh token
+            await this.oAuth2Client.getRequestHeaders()
+            this.token = this.oAuth2Client.credentials
+        }
+
+        writeFileSync(join(__dirname, "./token.json"), JSON.stringify(this.token));
 
         this.gmail = google.gmail({ version: 'v1', auth: this.oAuth2Client });
     }
@@ -60,5 +74,19 @@ export class Gmail {
             id: message.id,
             gmail: this.gmail
         }));
+    };
+
+    async sendMessage(sendMessageOptions: gmail_v1.Params$Resource$Users$Messages$Send) {
+        return await new Promise((resolve, reject) => {
+            this.gmail.users.messages.send(sendMessageOptions, (err, res) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+
+                resolve(res.data);
+            }
+            );
+        });
     };
 }

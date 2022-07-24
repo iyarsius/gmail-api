@@ -38,13 +38,15 @@ export class Message {
                 this.sizeEstimate = body.sizeEstimate;
                 this.historyId = body.historyId;
                 this.internalDate = body.internalDate;
-                this.author = {
-                    name: body.payload.headers?.find(header => header.name === "From").value.split(" <")[0].trim(),
-                    email: body.payload.headers?.find(header => header.name === "From").value.split(" <")[1].split(">")[0]
-                };
-                this.subject = body.payload.headers?.find(header => header.name === "Subject").value;
 
-                const encodedBody = body.payload.parts?.find(part => part.mimeType === "text/html").body.data;
+                const from = body.payload.headers?.find(header => header.name === "From")
+                this.author = {
+                    name: from?.value.split(" <")[0].trim(),
+                    email: from?.value.split(" <")[1]?.split(">")[0]
+                };
+                this.subject = body.payload.headers?.find(header => header.name === "Subject")?.value;
+
+                const encodedBody = body.payload.parts?.find(part => part.mimeType === "text/html")?.body.data;
                 this.body = encodedBody ? Buffer.from(encodedBody, "base64").toString() : "";
                 resolve(this);
             });

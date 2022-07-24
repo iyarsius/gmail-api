@@ -9,3 +9,9 @@ export interface ICredentials {
 export interface IGmailOptions extends ICredentials {
     token?: Credentials
 }
+
+export interface ISendMessageOptions {
+    to: string;
+    subject: string;
+    body: string;
+}
