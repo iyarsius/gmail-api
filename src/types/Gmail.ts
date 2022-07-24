@@ -1,5 +1,7 @@
 import { Credentials } from "google-auth-library";
 
+export { Credentials } from "google-auth-library";
+
 export interface ICredentials {
     client_id: string;
     client_secret: string;
