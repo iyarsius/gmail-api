@@ -74,7 +74,7 @@ Here is an example for retrieving the first 10 mails from inbox
         fromName: "NAME",
         to: 'user@gmail.com',
         subject: "SUBJECT HERE",
-        body: "HTML HERE,
+        body: "HTML HERE",
         attachments: [Buffer1, Buffer2...]
 });
 ```
