@@ -65,3 +65,16 @@ Here is an example for retrieving the first 10 mails from inbox
     
     console.log(messages)
 ```
+
+# Send mail
+
+```javascript
+ await client.gmail.sendMessage({
+        fromEmail: 'client-name@gmail.com',
+        fromName: "NAME",
+        to: 'user@gmail.com',
+        subject: "SUBJECT HERE",
+        body: "HTML HERE,
+        attachments: [Buffer1, Buffer2...]
+});
+```
