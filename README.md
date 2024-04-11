@@ -69,7 +69,7 @@ Here is an example for retrieving the first 10 mails from inbox
 # Send mail
 
 ```javascript
- await client.gmail.sendMessage({
+ await gmail.sendMessage({
         fromEmail: 'client-name@gmail.com',
         fromName: "NAME",
         to: 'user@gmail.com',
